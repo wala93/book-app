@@ -1,28 +1,28 @@
+'use strict';
+
+// Application Dependencies
 const express = require('express');
+const superagent = require('superagent');
+
+// Application Setup
 const app = express();
-const superagent=require('superagent');
-const port = process.env.PORT || 3000;
-const ejs = require('ejs');
+const PORT = process.env.PORT || 3001;
 
 // Application Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-  // Set the view engine for server-side templating
+// Set the view engine for server-side templating
 app.set('view engine', 'ejs');
 
-app.listen(port, () => {
-    console.log(`book-app listening at http://localhost:${port}`)
-  });
-//   app.get('/',(req,res)=>res.send('basic server book-app'))
+// API Routes
+// Renders the home page
+app.get('/', renderHomePage);
 
-  app.get('/', renderHomePage);
+// Renders the search form
+app.get('/searches/new', showForm);
 
-function renderHomePage(request, response) {
-    response.render('pages/index');
-  }
-
-  // Creates a new search to the Google Books API
+// Creates a new search to the Google Books API
 app.post('/searches', createSearch);
 
 // Catch-all
@@ -32,11 +32,15 @@ app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 
 // HELPER FUNCTIONS
 // Only show part of this to get students started
+let booksArray = [];
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-
+ 
+  this.author = info.volumeInfo.authors || 'No authors available.';
+  this.image_url =;
+  this.description = info.volumeInfo.description || 'No description available.';
   this.title = info.title || 'No title available'; // shortcircuit
-
+booksArray.push(this);
 }
 
 // Note that .ejs file extension is not required
