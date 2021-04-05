@@ -35,12 +35,12 @@ app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 let booksArray = [];
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
- 
-  this.author = info.volumeInfo.authors || 'No authors available.';
-  this.image_url =;
-  this.description = info.volumeInfo.description || 'No description available.';
+
+  this.author = info.authors || 'No authors available.';
+  this.img=info.imageLinks|| placeholderImage;
+  this.description = info.description || 'No description available.';
   this.title = info.title || 'No title available'; // shortcircuit
-booksArray.push(this);
+  booksArray.push(this);
 }
 
 // Note that .ejs file extension is not required
@@ -60,13 +60,13 @@ function createSearch(request, response) {
 
   console.log(request.body);
   console.log(request.body.search);
-  
+
   // can we convert this to ternary?
-  if (request.body.search[1] === 'title') { url += `+intitle:${request.body.search[0]}`; }
-  if (request.body.search[1] === 'author') { url += `+inauthor:${request.body.search[0]}`; }
+  if (request.body.search[1] === 'title') { url += `intitle:${request.body.search[0]}`; }
+  if (request.body.search[1] === 'author') { url += `inauthor:${request.body.search[0]}`; }
 
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => response.render('pages/show', { searchResults: results }));
+    .then(results => response.render('pages/searches/show', { searchResults: results }));
   // how will we handle errors?
 }

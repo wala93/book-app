@@ -5,9 +5,16 @@
   </head>
   <body>
     <main>
-        <% searchResults.forEach( book => { %>
-            <h3><%= book.title %></h3>
-        <% }) %>
+<div class="book">
+        <% searchResults.forEach(book => { %>
+          <section id="book-template">
+              <p><br>Title: <%= book.title %></p><br>
+              <img src='<%=book.img.thumbnail%>'><br>
+              <p>Author: <%= book.author %></p><br>
+              <p id="description">Description: <br><br><%= book.description.substring(0,300) %></p><br>
+          </section>
+          <% }); %>
+        </div>
     </main>
   </body>
 </html>
