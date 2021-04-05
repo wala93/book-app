@@ -1,0 +1,12 @@
+header{
+    background-color: #000000;
+    color: #ffffff;
+    width: 100%;
+}
+
+ h1{
+    float: left;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
