@@ -13,7 +13,7 @@ p {
     color: darkblue;
 }
 */
-
+@import url('reset.css');
 @import url('layout.css');
 @import url('modules.css');
 
@@ -32,15 +32,59 @@ body {
   
 /*Mobile*/  
 @media only screen and (max-width: 768px){
-    body {
-      width: 500px;
-    }
+
+.book{
+    width: 500px;
+    border: 1px solid black;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.5em;
+}
+
+form {
+    position : relative;
+    width  : 60%;
+    height : 498px;
+    margin : 0 auto;
+    padding: 1em;
+    box-sizing: border-box;
+    background-color : rgb(207, 198, 198) ;
+  
+   
+    display  : grid;
+    grid-gap : 20px;
+    grid-template-columns : repeat(2, 1fr);
+    grid-template-rows    : 10em 1em 1em 1em;
+  }
 }
 
 
 /*Desktop*/  
 @media only screen and (min-width: 768px){
-    body {
-      width: 960px;
+    .book{
+        width: 500px;
+        border: 1px solid black;
+        margin-top: 50px;
+        text-align: center;
+        font-size: 15px;
+        line-height: 1.5em;
     }
+
+    form {
+        position : relative;
+        width  : 60%;
+        height : 498px;
+        margin : 0 auto;
+        padding: 1em;
+        box-sizing: border-box;
+        background-color : rgb(207, 198, 198) ;
+      
+       
+        display  : grid;
+        grid-gap : 20px;
+        grid-template-columns : repeat(2, 1fr);
+        grid-template-rows    : 10em 1em 1em 1em;
+      }
 }
+
